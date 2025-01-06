@@ -1,11 +1,14 @@
+
 # My Personal Portfolio
 
 ## Description
 Containing a collection of real-world cases and their practical solutions.
 
-# Queue Number Assignment (Nomor Antrian)
+---
 
-## Example Case: Real-Life Queue Numbering in Orders
+## Chapter 1 - Queue Numbering in Orders: A Real-World Solution
+
+### Example Case: Real-Life Queue Numbering in Orders
 One practical example is a **medical prescription transaction** (e-commerce transactions specifically for purchasing medication). In this system, customers can place and pay for orders at any time, either for pickup or delivery. However, the staff preparing the prescriptions require time to fulfill each order, meaning orders must be processed in a queue. 
 
 To ensure fairness, a **First-In-First-Out (FIFO)** system is used, where:
@@ -19,7 +22,9 @@ For instance, if there are 100 transactions occurring simultaneously, the proces
 - **Performance:** Since SQS is optimized for queueing, it sends messages to Lambda in FIFO order, allowing Lambda to execute the logic efficiently. In contrast, cron scripts must manage both queueing and execution within the same instance, which can lead to bottlenecks and race conditions.
 - **Scalability:** SQS allows for a single queueing instance, while Lambda scales automatically based on the incoming messages, making it faster and more efficient than cron jobs, which require multiple instances to handle similar workloads.
 
-## Problem
+---
+
+### Problem
 Orders marked as "paid" do not always belong to the customers who clicked the "order" button first.
 
 1. When handled by a scheduler, the process is especially prone to **race conditions**, increasing the risk of redundancy or duplicate queue numbers in the orders.
@@ -27,17 +32,21 @@ Orders marked as "paid" do not always belong to the customers who clicked the "o
 3. This issue can be resolved by using **AWS SQS**, which is specifically designed for queueing. The task of updating queue numbers is then offloaded to **Lambda**, providing much faster performance compared to cron script schedulers.
 4. Transaction table locks in the database create additional challenges, making the process inefficient and error-prone.
 
-## Solution
+---
 
-### 1. AWS SQS + Lambda with FIFO
+### Solution
+
+#### 1. AWS SQS + Lambda with FIFO
 Implementing **AWS SQS** with **Lambda** using the **FIFO (First-In-First-Out)** concept ensures queue numbers are assigned sequentially. This approach eliminates risks of duplication or redundancy and provides a consistent, reliable order process.
 
-### 2. Cron-Based Scheduler (Alternative)
+#### 2. Cron-Based Scheduler (Alternative)
 A **cron-based scheduler** can also achieve FIFO assignment, but it requires significant effort to manipulate the scheduler to:
 - Update orders and
 - Assign queue numbers correctly.
 
 This approach demands custom logic to ensure sequential processing without introducing additional complexity.
 
-## Recommendation
+---
+
+### Recommendation
 Leveraging **AWS SQS + Lambda with FIFO** is the preferred approach due to its simplicity, scalability, and ability to handle high-concurrency scenarios while maintaining the integrity of queue number assignments.
