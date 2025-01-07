@@ -14,18 +14,15 @@
 
 ## Description
 
-This portfolio contains a collection of real-world cases and their practical solutions, showcasing how technology can address specific challenges in various industries.
+Containing a collection of real-world cases and their practical solutions.
 
 ---
 
 ## Chapter 1 - Queue Numbering in Orders: A Real-World Solution
 
-### 1.1 Example Case: Real-Life Queue Numbering in Orders
+### Example Case: Real-Life Queue Numbering in Orders
 
-A practical example can be found in a medical prescription transaction (e-commerce transactions specifically for purchasing medication). In this system:
-
-- Customers can place and pay for orders at any time, either for pickup or delivery.
-- However, staff preparing the prescriptions need time to fulfill each order, meaning orders must be processed in a queue.
+One practical example is a medical prescription transaction (e-commerce transactions specifically for purchasing medication). In this system, customers can place and pay for orders at any time, either for pickup or delivery. However, the staff preparing the prescriptions require time to fulfill each order, meaning orders must be processed in a queue.
 
 To ensure fairness, a **First-In-First-Out (FIFO)** system is used:
 
@@ -36,9 +33,7 @@ For instance, when 100 transactions occur simultaneously, the process is signifi
 
 ---
 
-### 1.2 Why AWS SQS + Lambda is Better
-
-Here’s why AWS SQS with Lambda is a better choice:
+### Why AWS SQS + Lambda is Better
 
 1. **Separation of Concerns**: 
    - AWS SQS handles the queueing of messages, while Lambda focuses solely on executing the logic based on the messages received in a FIFO manner. This separation enhances scalability and reliability.
@@ -51,9 +46,9 @@ Here’s why AWS SQS with Lambda is a better choice:
 
 ---
 
-### 1.3 Problem
+### Problem
 
-In this system, orders marked as "paid" may not always belong to the customers who clicked the "order" button first.
+Orders marked as "paid" may not always belong to the customers who clicked the "order" button first.
 
 - **Race conditions**: When handled by a scheduler, the process is especially prone to race conditions, increasing the risk of redundancy or duplicate queue numbers.
 - **Scheduler limitations**: As the business scales and more orders are received, a single instance of the scheduler may no longer suffice. This requires creating multiple instances, introducing new issues: race conditions between instances.
@@ -64,9 +59,9 @@ This issue can be resolved by using AWS SQS, designed specifically for queueing,
 
 ---
 
-### 1.4 Solution
+### Solution
 
-#### 1.4.1 AWS SQS + Lambda with FIFO
+#### AWS SQS + Lambda with FIFO
 
 Implementing **AWS SQS with Lambda using FIFO (First-In-First-Out)** ensures that queue numbers are assigned sequentially. This approach eliminates risks of duplication or redundancy, providing a consistent and reliable order process.
 
@@ -79,7 +74,7 @@ Example:
 
 This sequence ensures fairness and proper processing order.
 
-#### 1.4.2 Cron-Based Scheduler (Alternative)
+#### Cron-Based Scheduler (Alternative)
 
 A **cron-based scheduler** can also achieve FIFO assignment, but it requires significant effort to manipulate the scheduler to:
    
@@ -90,7 +85,7 @@ This method demands custom logic to ensure sequential processing without introdu
 
 ---
 
-### 1.5 Recommendation
+### Recommendation
 
 Leveraging **AWS SQS + Lambda with FIFO** is the preferred approach due to:
 
