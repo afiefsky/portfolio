@@ -1,3 +1,5 @@
+# Chapter 1 - Queue Numbering in Orders: A Real-World Solution
+
 ## Table of Contents
 
 1. [Example Case: Real-Life Queue Numbering in Orders](#example-case-real-life-queue-numbering-in-orders)
@@ -9,8 +11,6 @@
 5. [Recommendation](#recommendation)
 
 ---
-
-## Chapter 1 - Queue Numbering in Orders: A Real-World Solution
 
 ### Example Case: Real-Life Queue Numbering in Orders
 
