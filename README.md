@@ -1,6 +1,6 @@
-# My Personal Portfolio
+# Personal Experience Case Studies Portfolio
 
-A collection of real-world cases and their practical solutions.
+A curated collection of real-world problems and their practical, step-by-step solutions, showcasing expertise and thought processes.
 
 ## Table of Contents
 
